@@ -1,6 +1,8 @@
 package sg.edu.rp.dmsd.p12rpwebsites;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> al;
     ArrayAdapter<String> aa;
     Button b1;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        sp1.setSelection(prefs.getInt("owo",0));
+        sp2.setSelection(prefs.getInt("uwu",0));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +77,15 @@ public class MainActivity extends AppCompatActivity {
                                 "https://www.rp.edu.sg/soi/full-time-diplomas/details/r12"}
                 };
                 intent.putExtra("website", sites[sp1.getSelectedItemPosition()][sp2.getSelectedItemPosition()]);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                SharedPreferences.Editor prefEdit = prefs.edit();
+                prefEdit.putInt("owo", sp1.getSelectedItemPosition());
+                prefEdit.putInt("uwu", sp2.getSelectedItemPosition());
+                prefEdit.commit();
                 startActivity(intent);
             }
         });
+
+
     }
 }
