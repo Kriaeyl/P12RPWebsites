@@ -60,24 +60,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                String s;
-                if (sp1.getSelectedItemPosition() == 0) {
-                    if (sp2.getSelectedItemPosition() == 0) {
-                        s = "https://www.rp.edu.sg/";
-                    }
-                    else {
-                        s = "https://www.rp.edu.sg/student-life";
-                    }
-                }
-                else {
-                    if (sp2.getSelectedItemPosition() == 0) {
-                        s = "https://www.rp.edu.sg/soi/full-time-diplomas/details/r47";
-                    }
-                    else {
-                        s = "https://www.rp.edu.sg/soi/full-time-diplomas/details/r12";
-                    }
-                }
-                intent.putExtra("website", s);
+
+                String [][] sites = {
+                        {"https://www.rp.edu.sg/", "https://www.rp.edu.sg/student-life"},
+                        {"https://www.rp.edu.sg/soi/full-time-diplomas/details/r47",
+                                "https://www.rp.edu.sg/soi/full-time-diplomas/details/r12"}
+                };
+                intent.putExtra("website", sites[sp1.getSelectedItemPosition()][sp2.getSelectedItemPosition()]);
                 startActivity(intent);
             }
         });
