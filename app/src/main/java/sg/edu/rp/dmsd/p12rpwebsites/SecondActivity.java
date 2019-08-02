@@ -19,5 +19,8 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String s = intent.getStringExtra("website");
         wv.loadUrl(s);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.getSettings().setAllowFileAccess(false);
+        wv.getSettings().setBuiltInZoomControls(true);
     }
 }
